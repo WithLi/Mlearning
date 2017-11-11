@@ -24,7 +24,7 @@ class KNN():
         for i,test_sample in enumerate(X_test):
             #two columns [distance ,label] for each observed sample
             '''产生一个二维数组'''
-            neighbor = np.empty((X_train[0],2))
+            neighbor = np.empty((X_train.shape[0],2))
             # Calculate the distance from each observed sample to the
             # sample we wish to predict
             for j,observed_sample in enumerate(X_train):

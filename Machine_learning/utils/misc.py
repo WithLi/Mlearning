@@ -14,7 +14,8 @@ class Plot():
     def __init__(self):
         self.cmap = plt.get_cmap('viridis')
 
-    def _transform(self, X, dim):
+    @staticmethod
+    def transform(self, X, dim):
         covariance = calculate_covariance_matrix(X)
         eigenvalues, eigenvectors = np.linalg.eig(covariance)
         # Sort eigenvalues and eigenvector by largest eigenvalues
@@ -57,6 +58,34 @@ class Plot():
 
         plt.show()
     # Plot the dataset X and the corresponding labels y in 2D using PCA.
+        if scatter:
+            scatter_plots = scatter_labels = []
+            for s in scatter:
+                scatter_plots += [plt.scatter(s["x"], s["y"], color=s["color"], s=s["size"])]
+                scatter_labels += [s["label"]]
+            scatter_plots = tuple(scatter_plots)
+            scatter_labels = tuple(scatter_labels)
+
+        for l in lines:
+            li = plt.plot(l["x"], l["y"], color=s["color"], linewidth=l["width"], label=l["label"])
+
+        if mse:
+            plt.suptitle(title)
+            plt.title("MSE: %.2f" % mse, fontsize=10)
+        else:
+            plt.title(title)
+
+        if axis_labels:
+            plt.xlabel(axis_labels["x"])
+            plt.ylabel(axis_labels["y"])
+
+        if legend["type"] == "lines":
+            plt.legend(loc="lower_left")
+        elif legend["type"] == "scatter" and scatter:
+            plt.legend(scatter_plots, scatter_labels, loc=legend["loc"])
+
+        plt.show()
+
     def plot_in_2d(self, X, y=None, title=None, accuracy=None, legend_labels=None):
         X_transformed = self.transform(X,dim=2)
         x1 = X_transformed[:, 0]

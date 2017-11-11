@@ -31,7 +31,7 @@ def main():
 
     #Redurce dimense to two using Pca and plot the result
     """PCA降维，将结果画出"""
-    #Plot.plot_in_2d(X_train,y_pred,title="LogisticRegression",accuracy=accuracy)
+    Plot.plot_in_2d(X_train,y_pred,title="LogisticRegression",accuracy=accuracy)
     #plt.scatter(X_train,y_pred,title="LogisticRegression",accuracy=accuracy)
 if __name__ == '__main__':
     main()
